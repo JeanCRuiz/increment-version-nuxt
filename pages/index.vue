@@ -1,6 +1,6 @@
 <template>
     <v-container fluid class="bg-teal grid-container">
-        <h1>Version actual 1.0.0</h1>
+        <h1>Version actual {{ $version }}</h1>
     </v-container>
 </template>
 <style  scoped>

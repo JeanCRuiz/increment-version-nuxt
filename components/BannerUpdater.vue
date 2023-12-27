@@ -19,7 +19,7 @@ export default {
         }
     },
     mounted() {
-        this.show = true
+        console.log(this.$version);
     },
     methods: {
         hardReload() {
