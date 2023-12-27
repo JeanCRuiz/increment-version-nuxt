@@ -1,15 +1,15 @@
 <template>
-    <v-container fluid class="bg-teal grid-container">
-        <h1>Version actual {{ version }}</h1>
-    </v-container>
+  <v-container fluid class="bg-teal grid-container">
+    <h1>Version actual {{ version }}</h1>
+  </v-container>
 </template>
-<script>
+<script lang="ts">
 export default {
-    data() {
-        return {
-            version: this.$version
-        }
+  data () {
+    return {
+      version: this.$version
     }
+  }
 }
 </script>
 <style  scoped>

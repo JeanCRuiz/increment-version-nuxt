@@ -17,9 +17,6 @@
   align-items: center;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-
-
-
   .v-banner-text {
     font-size: 1.125rem;
     font-style: normal;

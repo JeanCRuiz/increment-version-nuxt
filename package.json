@@ -8,10 +8,13 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "increment": "node ./scripts/version-local.js && node ./scripts/version-firebase.js"
+    "increment": "node ./scripts/version-local.js && node ./scripts/version-firebase.js",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "eslint": "^8.56.0",
     "nuxt": "^3.9.0",
     "sass": "^1.69.5",
     "vite-plugin-vuetify": "^2.0.1",

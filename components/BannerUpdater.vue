@@ -1,31 +1,41 @@
 <template>
-    <v-banner v-if="show" lines="one" icon="mdi-update" class="mt-5 px-4 py-3 banner" :class="{ 'animation': show }"
-        max-width="934" position="absolute" rounded>
-        <v-banner-text tag="p">
-            <strong>Actualiza la página.</strong> Hemos mejorado la funcionalidad para una experiencia óptima.
-        </v-banner-text>
+  <v-banner
+    v-if="show"
+    lines="one"
+    icon="mdi-update"
+    class="mt-5 px-4 py-3 banner"
+    :class="{ 'animation': show }"
+    max-width="934"
+    position="absolute"
+    rounded
+  >
+    <v-banner-text tag="p">
+      <strong>Actualiza la página.</strong> Hemos mejorado la funcionalidad para una experiencia óptima.
+    </v-banner-text>
 
-        <template v-slot:actions>
-            <v-btn color="white" elevation="1" @click="hardReload">Actualizar</v-btn>
-        </template>
-    </v-banner>
+    <template #actions>
+      <v-btn color="white" elevation="1" @click="hardReload">
+        Actualizar
+      </v-btn>
+    </template>
+  </v-banner>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-    data() {
-        return {
-            show: false
-        }
-    },
-    mounted() {
-        console.log(this.$version);
-    },
-    methods: {
-        hardReload() {
-            // window.location.reload(true)
-            this.show = false
-        }
+  data () {
+    return {
+      show: false
     }
+  },
+  mounted () {
+    console.log(this.$version)
+  },
+  methods: {
+    hardReload () {
+      // window.location.reload(true)
+      this.show = false
+    }
+  }
 }
 </script>

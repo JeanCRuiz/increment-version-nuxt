@@ -1,83 +1,72 @@
-import { readFile, writeFile } from "node:fs";
-import { db } from "../firebase/firebase-admin.js";
+import { readFile, writeFile } from 'node:fs'
+import { db } from '../firebase/firebase-admin.js'
 
 class ManejadorVersiones {
-    path = '../increment-version-nuxt/public/json/version.json';
-    collection = 'version';
-    doc = '2-test';
+  path = '../increment-version-nuxt/public/json/version.json'
+  collection = 'version'
+  doc = '2-test'
 
-    async incrementarVersionPrincipal() {
+  incrementarVersionPrincipal () {
+    const path = this.path
 
-        const path = this.path
+    function callback (err, data) {
+      if (err) { throw err }
 
-        function callback(err, data) {
+      const jsonData = JSON.parse(data)
+      jsonData.version = Number.isInteger(parseInt(jsonData.version)) ? `${parseInt(jsonData.version) + 1}.0` : `${Math.ceil(parseInt(jsonData.version))}`
+      const updatedJSON = JSON.stringify(jsonData)
 
-
-            if (err) throw err;
-
-            const jsonData = JSON.parse(data)
-            jsonData.version = Number.isInteger(parseInt(jsonData.version)) ? `${parseInt(jsonData.version) + 1}.0` : `${Math.ceil(parseInt(jsonData.version))}`
-            const updatedJSON = JSON.stringify(jsonData)
-
-            writeFile(path, updatedJSON, 'utf-8', (err) => {
-                if (err) {
-                    console.error('Error al escribir en el archivo JSON:', err);
-                    return;
-                }
-
-                const versionActualizada = JSON.parse(updatedJSON)
-
-                console.log(`Archivo JSON actualizado correctamente: ${versionActualizada.version}`);
-            })
+      writeFile(path, updatedJSON, 'utf-8', (err) => {
+        if (err) {
+          console.error('Error al escribir en el archivo JSON:', err)
+          return
         }
 
-        readFile(this.path, callback)
+        const versionActualizada = JSON.parse(updatedJSON)
 
+        console.log(`Archivo JSON actualizado correctamente: ${versionActualizada.version}`)
+      })
     }
 
-    async incrementarVersionMenor() {
+    readFile(this.path, callback)
+  }
 
-        const path = this.path
+  incrementarVersionMenor () {
+    const path = this.path
 
-        function callback(err, data) {
-            if (err) throw err;
+    function callback (err, data) {
+      if (err) { throw err }
 
+      const jsonData = JSON.parse(data)
+      jsonData.version = `${(Number(jsonData.version) + 0.1).toFixed(1)}`
 
-            const jsonData = JSON.parse(data);
-            jsonData.version = `${(Number(jsonData.version) + 0.1).toFixed(1)}`
+      const updatedJSON = JSON.stringify(jsonData)
 
-            const updatedJSON = JSON.stringify(jsonData)
-
-
-            writeFile(path, updatedJSON, 'utf-8', (err) => {
-                if (err) {
-                    console.error('Error al escribir en el archivo JSON:', err);
-                    return;
-                }
-
-                const versionActualizada = JSON.parse(updatedJSON)
-
-                console.log(`Version actualizada correctamente: ${versionActualizada.version}`);
-            })
+      writeFile(path, updatedJSON, 'utf-8', (err) => {
+        if (err) {
+          console.error('Error al escribir en el archivo JSON:', err)
+          return
         }
 
-        readFile(this.path, callback)
+        const versionActualizada = JSON.parse(updatedJSON)
 
+        console.log(`Version actualizada correctamente: ${versionActualizada.version}`)
+      })
     }
 
-    actualizarFirebase() {
-        readFile(this.path, async (err, data) => {
-            if (err) throw err;
+    readFile(this.path, callback)
+  }
 
+  actualizarFirebase () {
+    readFile(this.path, async (err, data) => {
+      if (err) { throw err }
 
-            const jsonData = JSON.parse(data)
-            const version = jsonData.version
-            await db.collection(this.collection).doc(this.doc).update({ code: version })
-            console.log(`La version fue actualizada: "${version}"`);
-
-        })
-    }
-
+      const jsonData = JSON.parse(data)
+      const version = jsonData.version
+      await db.collection(this.collection).doc(this.doc).update({ code: version })
+      console.log(`La version fue actualizada: "${version}"`)
+    })
+  }
 }
 
 export default ManejadorVersiones
