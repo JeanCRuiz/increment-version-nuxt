@@ -1,0 +1,13 @@
+name: Increment version and deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Probando el workflow
+       run: echo "Hola mundo"
