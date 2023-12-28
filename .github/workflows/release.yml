@@ -1,4 +1,4 @@
-name: Increment version and deploy
+name: Deploy
 
 on:
   push:
