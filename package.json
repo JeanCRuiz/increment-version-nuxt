@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "increment": "node ./scripts/version-local.js && node ./scripts/version-firebase.js",
+    "increment-local": "node ./scripts/version-local.js ",
+    "increment-firebase": "node ./scripts/version-firebase.js",
     "lint": "eslint ."
   },
   "devDependencies": {
