@@ -1,9 +1,9 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore, collection, doc, getDocs, onSnapshot } from 'firebase/firestore'
-import { getAuth } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { getStorage } from 'firebase/storage'
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(async () => {
   const firebaseConfig = {
     apiKey: 'AIzaSyDxfInO54Xh_xn1iiLp6Cloq1YW3eSKujI',
     authDomain: 'global-zechat.firebaseapp.com',
@@ -16,6 +16,7 @@ export default defineNuxtPlugin(() => {
 
   const app = initializeApp(firebaseConfig)
   const auth = getAuth(app)
+  await signInWithEmailAndPassword(auth, 'jeanruiz@lugotech.com.do', '123456')
   const db = getFirestore(app)
 
   return {

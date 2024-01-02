@@ -26,17 +26,18 @@ export default {
   data () {
     return {
       show: false,
-      appVersion: this.$version,
+      appVersion: null,
       snapKiller: null
     }
   },
-  mounted () {
+  async mounted () {
+    this.appVersion = await this.$version
+
     const firebaseVersionPath = this.$doc(this.$db, 'version', '2-test')
-
     this.snapKiller = this.$onSnapshot(firebaseVersionPath, (snap) => {
-      const version = snap.data().code
+      const version = snap.data()
 
-      const firebaseBaseVersionNum = Number(version)
+      const firebaseBaseVersionNum = Number(version.code)
       const appVersionNum = Number(this.appVersion)
 
       console.log(firebaseBaseVersionNum, appVersionNum)
