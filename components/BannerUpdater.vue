@@ -39,6 +39,8 @@ export default {
       const firebaseBaseVersionNum = Number(version)
       const appVersionNum = Number(this.appVersion)
 
+      console.log(firebaseBaseVersionNum, appVersionNum)
+
       if (firebaseBaseVersionNum > appVersionNum) {
         this.show = true
       }
