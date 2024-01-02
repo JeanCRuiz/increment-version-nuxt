@@ -21,19 +21,32 @@
   </v-banner>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   data () {
     return {
-      show: false
+      show: false,
+      appVersion: this.$version,
+      snapKiller: null
     }
   },
   mounted () {
-    console.log(this.$version)
+    const firebaseVersionPath = this.$doc(this.$db, 'version', '2-test')
+
+    this.snapKiller = this.$onSnapshot(firebaseVersionPath, (snap) => {
+      const version = snap.data().code
+
+      const firebaseBaseVersionNum = Number(version)
+      const appVersionNum = Number(this.appVersion)
+
+      if (firebaseBaseVersionNum > appVersionNum) {
+        this.show = true
+      }
+    })
   },
   methods: {
     hardReload () {
-      // window.location.reload(true)
+      window.location.reload(true)
       this.show = false
     }
   }

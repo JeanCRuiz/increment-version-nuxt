@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.3.67",
+    "firebase": "^10.7.1",
     "firebase-admin": "^12.0.0",
     "inquirer": "^9.2.12"
   }
