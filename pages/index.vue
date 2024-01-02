@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="bg-teal grid-container">
     <h1>Version actual "{{ version }}"</h1>
-    <span>by: Jean Ruiz</span>
+    <span>by: Jean Ruiz Veriguete</span>
   </v-container>
 </template>
 <script lang="ts">
