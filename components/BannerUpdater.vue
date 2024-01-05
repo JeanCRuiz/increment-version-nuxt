@@ -27,25 +27,34 @@ export default {
     return {
       show: false,
       appVersion: null,
+      latestRealease: null,
       snapKiller: null
     }
   },
   async mounted () {
     this.appVersion = await this.$version
 
-    const firebaseVersionPath = this.$doc(this.$db, 'version', '2-test')
-    this.snapKiller = this.$onSnapshot(firebaseVersionPath, (snap) => {
-      const version = snap.data()
+    const response = await fetch('https://api.github.com/repos/jeancruiz/increment-version-nuxt/releases/latest')
+    const data = await response.json()
+    this.latestRealease = data.tag_name
 
-      const firebaseBaseVersionNum = Number(version.code)
-      const appVersionNum = Number(this.appVersion)
+    if (this.appVersion !== this.latestRealease) {
+      this.show = true
+    }
 
-      console.log(firebaseBaseVersionNum, appVersionNum)
+    // const firebaseVersionPath = this.$doc(this.$db, 'version', '2-test')
+    // this.snapKiller = this.$onSnapshot(firebaseVersionPath, (snap) => {
+    //   const version = snap.data()
 
-      if (firebaseBaseVersionNum > appVersionNum) {
-        this.show = true
-      }
-    })
+    //   const firebaseBaseVersionNum = Number(version.code)
+    //   const appVersionNum = Number(this.appVersion)
+
+    //   console.log(firebaseBaseVersionNum, appVersionNum)
+
+    //   if (firebaseBaseVersionNum > appVersionNum) {
+    //     this.show = true
+    //   }
+    // })
   },
   methods: {
     hardReload () {

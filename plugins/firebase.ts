@@ -16,7 +16,7 @@ export default defineNuxtPlugin(async () => {
 
   const app = initializeApp(firebaseConfig)
   const auth = getAuth(app)
-  await signInWithEmailAndPassword(auth, 'jeanruiz@lugotech.com.do', '123456')
+  await signInWithEmailAndPassword(auth, 'marcosdash@lugotech.com.do', '123456')
   const db = getFirestore(app)
 
   return {
